@@ -15,7 +15,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <h1>Hello Rails API</h1>
+      <h2>Below are greetings fetches from rails api</h2>
       <button
         type="button"
         onClick={() => {
@@ -25,13 +25,8 @@ const App = () => {
         Refresh
       </button>
       {loading && <p>Loading...</p>}
-      {error && (
-      <p style={{ color: 'red' }}>
-        No response from the server, Please start your rails server
-      </p>
-      )}
-
-      <h2>{greeting}</h2>
+      {error && <p className="error-message">Start your rails server in order to get the greetings</p>}
+      <h1>{greeting}</h1>
     </div>
   );
 };
