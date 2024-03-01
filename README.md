@@ -53,7 +53,7 @@
 
 ## Back-End-Link
 
-The back-end repo is available [here](https://github.com/bhushan354/hello-rails-front-end)
+The back-end repo is available [here](https://github.com/bhushan354/hello-rails-back-end)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
