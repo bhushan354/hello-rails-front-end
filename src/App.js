@@ -1,7 +1,7 @@
-import './App.css';
 import React, { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from './redux/hooks';
 import { fetchGreeting } from './redux/slices/greetingSlice';
+import Greetings from './components/Greetings';
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -11,23 +11,19 @@ const App = () => {
 
   useEffect(() => {
     dispatch(fetchGreeting());
-  }, []);
+  }, [dispatch]);
+
+  const handleRefresh = () => {
+    dispatch(fetchGreeting());
+  };
 
   return (
-    <div className="App">
-      <h2>Below are greetings fetches from rails api</h2>
-      <button
-        type="button"
-        onClick={() => {
-          dispatch(fetchGreeting());
-        }}
-      >
-        Refresh
-      </button>
-      {loading && <p>Loading...</p>}
-      {error && <p className="error-message">Start your rails server in order to get the greetings</p>}
-      <h1>{greeting}</h1>
-    </div>
+    <Greetings
+      greeting={greeting}
+      loading={loading}
+      error={error}
+      onRefresh={handleRefresh}
+    />
   );
 };
 
