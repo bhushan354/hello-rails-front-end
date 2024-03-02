@@ -1,25 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from 'react-router-dom';
+import { useAppSelector, useAppDispatch } from './redux/hooks';
+import { fetchGreeting } from './redux/slices/greetingSlice';
+import Greetings from './components/Greetings';
 
-function App() {
+const App = () => {
+  const dispatch = useAppDispatch();
+  const greeting = useAppSelector((state) => state.greeting.value);
+  const loading = useAppSelector((state) => state.greeting.loading);
+  const error = useAppSelector((state) => state.greeting.error);
+
+  useEffect(() => {
+    dispatch(fetchGreeting());
+  }, [dispatch]);
+
+  const handleRefresh = () => {
+    dispatch(fetchGreeting());
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route
+          path="/"
+          element={(
+            <Greetings
+              greeting={greeting}
+              loading={loading}
+              error={error}
+              onRefresh={handleRefresh}
+            />
+)}
+        />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
