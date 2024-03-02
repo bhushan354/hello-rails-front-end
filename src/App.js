@@ -1,4 +1,9 @@
 import React, { useEffect } from 'react';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from './redux/hooks';
 import { fetchGreeting } from './redux/slices/greetingSlice';
 import Greetings from './components/Greetings';
@@ -18,12 +23,21 @@ const App = () => {
   };
 
   return (
-    <Greetings
-      greeting={greeting}
-      loading={loading}
-      error={error}
-      onRefresh={handleRefresh}
-    />
+    <Router>
+      <Routes>
+        <Route
+          path="/"
+          element={(
+            <Greetings
+              greeting={greeting}
+              loading={loading}
+              error={error}
+              onRefresh={handleRefresh}
+            />
+)}
+        />
+      </Routes>
+    </Router>
   );
 };
 
